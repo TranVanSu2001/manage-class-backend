@@ -19,8 +19,8 @@ name varchar(255),
 age int,
 email varchar(255),
 sex varchar(10),
-classID varchar(255) FOREIGN KEY REFERENCES Class(id)
-
+classID varchar(255),
+foreign key(classID) references Class(id)
 );
 
 create table ClassStudent(
