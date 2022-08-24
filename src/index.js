@@ -17,17 +17,6 @@ app.listen(PORT, async () => {
   console.log(`🚀 Server running on port: ${PORT}`);
 });
 
-
-// app.get("/class/getClass", (req, res) => {
-//   db.query("SELECT * FROM class", (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-
-//     res.send(result);
-//   });
-// });
-
 // app.post("/class/postIdEdit", (req, res) => {
 //   const idEdit = req.body.idEdit;
 
@@ -73,42 +62,6 @@ app.listen(PORT, async () => {
 //   );
 // });
 
-// //delete class
-// app.post("/class/deleteClass", (req, res) => {
-//   const idDelete = req.body.idDelete;
-
-//   db.query(
-//     // `delete from student where classID = (?);
-//     `delete from class where id = (?);`,
-//     [idDelete, idDelete],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       res.send(result);
-//     }
-//   );
-// });
-
-// //edit infomation class
-// app.post("/class/editClass", (req, res) => {
-//   const id = req.body.id;
-//   const name = req.body.name;
-//   const numOfStu = req.body.numOfStu;
-//   const oldId = req.body.oldId;
-
-//   db.query(
-//     `UPDATE class set id = ?, name = ?, numberOfStudent = ? where id = ?;`,
-//     [id, name, numOfStu, oldId],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       res.send(result);
-//     }
-//   );
-// });
-
 // //get list id class
 // app.get("/class/getListId", (req, res) => {
 //   db.query("select id from class", (err, result) => {
@@ -118,25 +71,6 @@ app.listen(PORT, async () => {
 
 //     res.send(result);
 //   });
-// });
-
-// //add class
-// app.post("/class/add", (req, res) => {
-//   const id = req.body.id;
-//   const name = req.body.name;
-//   const numOfStu = req.body.numOfStu;
-
-//   db.query(
-//     "INSERT INTO class (id, name, numberOfStudent) values(?,?,?)",
-//     [id, name, numOfStu],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         console.log(result);
-//       }
-//     }
-//   );
 // });
 
 // //get list student by classID
