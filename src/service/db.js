@@ -1,30 +1,28 @@
-
-
 const { createPool } = require("mysql2");
 
-const DB_PASSWORD = "88888888";
-const DB_NAME = "dashboard";
+const DB_PASSWORD = "661002";
+const DB_NAME = "managestudent";
 const DB_USER = "root";
 
 // create connection pool
 const db = createPool({
-    host: "localhost",
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    insecureAuth: true,
-    multipleStatements: true,
+  host: "localhost",
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  insecureAuth: true,
+  multipleStatements: true,
 });
 
 // initialize table when server has started
 const initTable = async () => {
-    await db.promise().query(`create table if not exists Class(
+  await db.promise().query(`create table if not exists Class(
             id varchar(255) primary key,
             name varchar(255),
             numberOfStudent int
     )`);
 
-    await db.promise().query(`create table if not exists Subject(
+  await db.promise().query(`create table if not exists Subject(
         id varchar(255) primary key,
         name varchar(255),
         classID varchar(255),
@@ -33,7 +31,7 @@ const initTable = async () => {
         endTime varchar(255)
     )`);
 
-    await db.promise().query(`create table if not exists Student(
+  await db.promise().query(`create table if not exists Student(
         id varchar(255) primary key,
         name varchar(255),
         age int,
@@ -43,7 +41,7 @@ const initTable = async () => {
         foreign key(classID) references Class(id)
     )`);
 
-    await db.promise().query(`create table if not exists ClassStudent(
+  await db.promise().query(`create table if not exists ClassStudent(
         id varchar(255) primary key,
         classID varchar(255),
         foreign key (classID) references Subject(id),
