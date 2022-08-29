@@ -25,13 +25,13 @@ const sendMailToStudent = async (req, res) => {
   };
 
   //step 3:
-  // transporter.sendMail(mailOptions, function (err, data) {
-  //   if (err) {
-  //     console.log("something wrong: ", err);
-  //   } else {
-  //     console.log("mail sent");
-  //   }
-  // });
+  transporter.sendMail(mailOptions, function (err, data) {
+    if (err) {
+      console.log("something wrong: ", err);
+    } else {
+      console.log("mail sent");
+    }
+  });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
