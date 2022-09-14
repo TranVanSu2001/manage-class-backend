@@ -1,13 +1,15 @@
 const { db } = require("../service/db");
 const { RESPONSE_CODE } = require("../constant");
+const { getAllStudentByClassId } = require("../service/student");
+const { getAllClass, createClass } = require("../service/class");
 
 const getAllClassController = async (req, res) => {
-  const [rows, fields] = await db.promise().query("SELECT * FROM class");
+  const listData = await getAllClass();
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Get all class successful",
-    data: rows,
+    data: listData,
   });
 };
 
@@ -23,18 +25,12 @@ const createClassController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query("INSERT INTO class (id, name, numberOfStudent) values(?,?,?)", [
-      id,
-      name,
-      numberOfStudent,
-    ]);
+  const result = await createClass({ numberOfStudent, id, name });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Create class successful",
-    data: rows,
+    data: result,
   });
 };
 
@@ -95,15 +91,12 @@ const getAllStudentClassController = async (req, res) => {
       message: "@classID can not be empty",
     });
   }
-
-  const [rows, fields] = await db
-    .promise()
-    .query(`select * from student where classID = (?);`, [classID]);
+  const listClass = await getAllStudentByClassId(classID);
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Get all student in class successful",
-    data: rows,
+    data: listClass,
   });
 };
 

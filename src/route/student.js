@@ -7,7 +7,7 @@ const {
   deleteStudentController,
 } = require("../controller/student");
 
-const { sendMailToStudent } = require("../mailer/sendmail");
+const { sendMailToStudent } = require("../service/sendmail");
 
 const studentRouter = express.Router();
 
