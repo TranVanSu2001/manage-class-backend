@@ -1,4 +1,5 @@
 require("dotenv").config();
+const nodemailer = require("nodemailer");
 const { RESPONSE_CODE } = require("../constant");
 
 const sendMailToStudent = async (req, res) => {
@@ -6,7 +7,6 @@ const sendMailToStudent = async (req, res) => {
   const subject = req.body.subject;
   const receiveMail = req.body.receiveMail;
 
-  const nodemailer = require("nodemailer");
 
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -16,7 +16,7 @@ const sendMailToStudent = async (req, res) => {
     },
   });
 
-  //step 2
+  // step 2
   let mailOptions = {
     from: "tranvansu2001@gmail.com",
     to: receiveMail,
@@ -24,7 +24,7 @@ const sendMailToStudent = async (req, res) => {
     text: content,
   };
 
-  //step 3:
+  // step 3:
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
       console.log("something wrong: ", err);
