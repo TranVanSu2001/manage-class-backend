@@ -1,37 +1,82 @@
 const { db } = require("./db");
 
 const getAllClass = async (req, res) => {
-    try {
-        const [rows, fields] = await db.promise().query("SELECT * FROM class");
-        return rows;
-    } catch (err) {
-        throw new Error(err);
-    }
-
-
+  try {
+    const [rows, fields] = await db.promise().query("SELECT * FROM class");
+    return rows;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 const createClass = async (data) => {
-    try {
-        const id = data.id;
-        const name = data.name;
-        const numberOfStudent = data.numberOfStudent;
+  try {
+    const id = data.id;
+    const name = data.name;
+    const numberOfStudent = data.numberOfStudent;
 
-        const [rows, fields] = await db
-            .promise()
-            .query("INSERT INTO class (id, name, numberOfStudent) values(?,?,?)", [
-                id,
-                name,
-                numberOfStudent,
-            ]);
+    const [rows, fields] = await db
+      .promise()
+      .query("INSERT INTO class (id, name, numberOfStudent) values(?,?,?)", [
+        id,
+        name,
+        numberOfStudent,
+      ]);
 
-        return rows;
-    } catch (err) {
-        throw new Error(err);
-    }
+    return rows;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const updateClass = async (data) => {
+  try {
+    const id = data.id;
+    const name = data.name;
+    const numberOfStudent = data.numberOfStudent;
+
+    const [rows, fields] = await db
+      .promise()
+      .query(`UPDATE class set name = ?, numberOfStudent = ? where id = ?;`, [
+        name,
+        numberOfStudent,
+        id,
+      ]);
+
+    return rows;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const deleteClass = async (data) => {
+  try {
+    const classdId = data.classdId;
+
+    const [rows, fields] = await db
+      .promise()
+      .query(`delete from class where id = (?);`, [classdId]);
+
+    return rows;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const getIdClass = async () => {
+  try {
+    const [rows, fields] = await db.promise().query("SELECT id FROM class");
+
+    return rows;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 module.exports = {
-    getAllClass,
-    createClass
+  getAllClass,
+  createClass,
+  updateClass,
+  deleteClass,
+  getIdClass,
 };

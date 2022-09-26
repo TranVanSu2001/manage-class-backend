@@ -1,23 +1,20 @@
 const { db } = require("../service/db");
 const { RESPONSE_CODE } = require("../constant");
 
+const {
+  getAllSubject,
+  createSubject,
+  updateSubject,
+  deleteSubject,
+} = require("../service/subject");
+
 const getAllSubjectController = async (req, res) => {
-  const [rows, fields] = await db.promise().query("SELECT * FROM subject");
+  const results = await getAllSubject();
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Get all class successful",
-    data: rows,
-  });
-};
-
-const getListIdSubjectController = async (req, res) => {
-  const [rows, fields] = await db.promise().query("SELECT id FROM subject");
-
-  res.send({
-    code: RESPONSE_CODE.SUCCESS,
-    message: "Get list id subject successful",
-    data: rows,
+    data: results,
   });
 };
 
@@ -35,15 +32,13 @@ const createSubjectController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query("INSERT INTO subject values(?,?,?,?,?)", [
-      id,
-      name,
-      classID,
-      startTime,
-      endTime,
-    ]);
+  const results = await createSubject({
+    id,
+    name,
+    classID,
+    startTime,
+    endTime,
+  });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
@@ -61,9 +56,7 @@ const deleteSubjectController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query(`delete from subject where id = (?);`, [idDelete]);
+  const results = await deleteSubject({ idDelete });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
@@ -85,23 +78,23 @@ const updateSubjectController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query(
-      `UPDATE subject set name = ?, classID = ?, startTime = ?, endTime = ? where id = ?`,
-      [name, classID, startTime, endTime, id]
-    );
+  const results = await updateSubject({
+    id,
+    name,
+    classID,
+    startTime,
+    endTime,
+  });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Update subject successful",
-    data: rows,
+    data: results,
   });
 };
 
 module.exports = {
   getAllSubjectController,
-  getListIdSubjectController,
   createSubjectController,
   deleteSubjectController,
   updateSubjectController,

@@ -1,6 +1,12 @@
 const { db } = require("../service/db");
 const { RESPONSE_CODE } = require("../constant");
 
+const {
+  createStudent,
+  updateStudent,
+  deleteStudent,
+} = require("../service/student");
+
 //get all student
 const getAllStudentController = async (req, res) => {
   const [rows, fields] = await db.promise().query("SELECT * FROM student");
@@ -28,31 +34,11 @@ const createStudentController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query("INSERT INTO student values(?,?,?,?,?,?)", [
-      id,
-      name,
-      age,
-      email,
-      sex,
-      classID,
-    ]);
+  const results = await createStudent({ id, name, age, email, classID, sex });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Create student successful",
-  });
-};
-
-//get list id student
-const getIdStudentController = async (req, res) => {
-  const [rows, fields] = await db.promise().query("SELECT id FROM student");
-
-  res.send({
-    code: RESPONSE_CODE.SUCCESS,
-    message: "Get list id student successful",
-    data: rows,
   });
 };
 
@@ -72,17 +58,12 @@ const updateStudentController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query(
-      `UPDATE student set name = ?, age = ?, sex = ?, email = ?, classID = ? where id = ?`,
-      [name, age, sex, email, classID, id]
-    );
+  const results = await updateStudent({ id, name, age, sex, email, classID });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Update student successful",
-    data: rows,
+    data: results,
   });
 };
 
@@ -96,9 +77,7 @@ const deleteStudentController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query(`delete from student where id = (?);`, [idDelete]);
+  const results = await deleteStudent({ idDelete });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
@@ -109,7 +88,6 @@ const deleteStudentController = async (req, res) => {
 module.exports = {
   getAllStudentController,
   createStudentController,
-  getIdStudentController,
   updateStudentController,
   deleteStudentController,
 };

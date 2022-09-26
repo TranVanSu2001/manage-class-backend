@@ -1,7 +1,13 @@
 const { db } = require("../service/db");
 const { RESPONSE_CODE } = require("../constant");
 const { getAllStudentByClassId } = require("../service/student");
-const { getAllClass, createClass } = require("../service/class");
+const {
+  getAllClass,
+  createClass,
+  updateClass,
+  deleteClass,
+  getIdClass,
+} = require("../service/class");
 
 const getAllClassController = async (req, res) => {
   const listData = await getAllClass();
@@ -46,18 +52,12 @@ const updateClassController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query(`UPDATE class set name = ?, numberOfStudent = ? where id = ?;`, [
-      name,
-      numberOfStudent,
-      id,
-    ]);
+  const results = await updateClass({ id, name, numberOfStudent });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Update class successful",
-    data: rows,
+    data: results,
   });
 };
 
@@ -71,14 +71,12 @@ const deleteClassController = async (req, res) => {
     });
   }
 
-  const [rows, fields] = await db
-    .promise()
-    .query(`delete from class where id = (?);`, [classdId]);
+  const results = await deleteClass({ classdId });
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Delete class successful",
-    data: rows,
+    data: results,
   });
 };
 
@@ -102,12 +100,11 @@ const getAllStudentClassController = async (req, res) => {
 
 //get list id class
 const getIdClassController = async (req, res) => {
-  const [rows, fields] = await db.promise().query("SELECT id FROM class");
-
+  const results = await getIdClass();
   res.send({
     code: RESPONSE_CODE.SUCCESS,
     message: "Get list id class successful",
-    data: rows,
+    data: results,
   });
 };
 
