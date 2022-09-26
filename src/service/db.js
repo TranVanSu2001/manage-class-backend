@@ -45,6 +45,11 @@ const initTable = async () => {
         studentID varchar(255),
         foreign key (studentID) references Student(id)
     )`);
+
+  await db.promise().query(`create table if not exists User(
+      username varchar(255) primary key,
+      password varchar(255)
+  )`);
 };
 
 module.exports = { initTable, db };

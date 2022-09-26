@@ -1,13 +1,13 @@
 const { db } = require("../service/db");
 const { RESPONSE_CODE } = require("../constant");
-
 const {
   createStudent,
   updateStudent,
   deleteStudent,
 } = require("../service/student");
 
-//get all student
+// get all student
+// TODO: need to move database access to /service
 const getAllStudentController = async (req, res) => {
   const [rows, fields] = await db.promise().query("SELECT * FROM student");
 
@@ -18,7 +18,7 @@ const getAllStudentController = async (req, res) => {
   });
 };
 
-//add new student
+// add new student
 const createStudentController = async (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
@@ -42,7 +42,7 @@ const createStudentController = async (req, res) => {
   });
 };
 
-//update student
+// update student
 const updateStudentController = async (req, res) => {
   const id = req.body.id;
   const name = req.body.name;
