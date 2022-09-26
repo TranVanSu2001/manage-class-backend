@@ -1,6 +1,4 @@
-const { db } = require("../service/db");
 const { RESPONSE_CODE } = require("../constant");
-
 const {
   getAllSubject,
   createSubject,
