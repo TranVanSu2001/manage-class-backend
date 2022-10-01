@@ -7,8 +7,11 @@ const {
   getAllStudentClassController,
   getIdClassController,
 } = require("../controller/class");
+const { validateUser } = require('../middleware/auth');
 
 const classRouter = express.Router();
+
+classRouter.use(validateUser);
 
 classRouter.get("/", getAllClassController);
 classRouter.post("/", createClassController);
