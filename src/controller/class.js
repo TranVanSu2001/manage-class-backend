@@ -9,6 +9,9 @@ const {
 } = require("../service/class");
 
 const getAllClassController = async (req, res) => {
+  const { user } = req;
+  console.log('user from controller', user);
+
   const listData = await getAllClass();
 
   res.send({

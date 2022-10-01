@@ -54,13 +54,21 @@ const validateAuthToken = async (token) => {
 };
 
 const getUserFromToken = async (token) => {
-    let user;
-    const decodedData = await validateAuthToken(token);
-    if (decodedData) {
-        user = await getUserByUserName(decodedData?.user);
-    }
+    try {
+        let user;
+        if (!token) {
+            return user;
+        }
 
-    return user;
+        const decodedData = await validateAuthToken(token);
+        if (decodedData) {
+            user = await getUserByUserName(decodedData?.user);
+        }
+
+        return user;
+    } catch {
+        return null;
+    }
 };
 
 module.exports = {

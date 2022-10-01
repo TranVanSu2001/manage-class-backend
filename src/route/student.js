@@ -5,10 +5,12 @@ const {
   updateStudentController,
   deleteStudentController,
 } = require("../controller/student");
-
+const { validateUser } = require('../middleware/auth');
 const { sendMailToStudent } = require("../service/sendmail");
 
 const studentRouter = express.Router();
+
+studentRouter.use(validateUser);
 
 studentRouter.get("/", getAllStudentController);
 studentRouter.post("/", createStudentController);
