@@ -20,12 +20,7 @@ const getAllStudentController = async (req, res) => {
 
 // add new student
 const createStudentController = async (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const age = req.body.age;
-  const email = req.body.email;
-  const classID = req.body.classID;
-  const sex = req.body.sex;
+  const { id, name, age, email, classID, sex } = req.body;
 
   if (id === undefined) {
     res.send({
@@ -44,12 +39,7 @@ const createStudentController = async (req, res) => {
 
 // update student
 const updateStudentController = async (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const age = req.body.age;
-  const sex = req.body.sex;
-  const email = req.body.email;
-  const classID = req.body.classID;
+  const { id, name, age, sex, email, classID } = req.body;
 
   if (id === undefined) {
     res.send({
@@ -68,7 +58,7 @@ const updateStudentController = async (req, res) => {
 };
 
 const deleteStudentController = async (req, res) => {
-  const idDelete = req.params.idDelete;
+  const { idDelete } = req.params;
 
   if (idDelete === undefined) {
     res.send({

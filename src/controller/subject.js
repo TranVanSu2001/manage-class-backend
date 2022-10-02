@@ -17,11 +17,7 @@ const getAllSubjectController = async (req, res) => {
 };
 
 const createSubjectController = async (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const classID = req.body.classID;
-  const startTime = req.body.startTime;
-  const endTime = req.body.endTime;
+  const { id, name, classID, startTime, endTime } = req.body;
 
   if (id === undefined) {
     res.send({
@@ -45,7 +41,7 @@ const createSubjectController = async (req, res) => {
 };
 
 const deleteSubjectController = async (req, res) => {
-  const idDelete = req.params.idDelete;
+  const { idDelete } = req.params;
 
   if (idDelete === undefined) {
     res.send({
@@ -63,11 +59,7 @@ const deleteSubjectController = async (req, res) => {
 };
 
 const updateSubjectController = async (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const classID = req.body.classID;
-  const startTime = req.body.startTime;
-  const endTime = req.body.endTime;
+  const { id, name, classID, startTime, endTime } = req.body;
 
   if (id === undefined) {
     res.send({

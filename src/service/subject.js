@@ -10,11 +10,7 @@ const getAllSubject = async () => {
 };
 
 const createSubject = async (data) => {
-  const id = data.id;
-  const name = data.name;
-  const classID = data.classID;
-  const startTime = data.startTime;
-  const endTime = data.endTime;
+  const { id, name, classID, startTime, endTime } = data;
 
   try {
     const [rows, fields] = await db
@@ -33,11 +29,7 @@ const createSubject = async (data) => {
 };
 
 const updateSubject = async (data) => {
-  const id = data.id;
-  const name = data.name;
-  const classID = data.classID;
-  const startTime = data.startTime;
-  const endTime = data.endTime;
+  const { id, name, classID, startTime, endTime } = data;
 
   try {
     const [rows, fields] = await db
@@ -53,7 +45,8 @@ const updateSubject = async (data) => {
 };
 
 const deleteSubject = async (data) => {
-  const idDelete = data.idDelete;
+  const { idDelete } = data;
+
   try {
     const [rows, fields] = await db
       .promise()
