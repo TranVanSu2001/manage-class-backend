@@ -7,8 +7,7 @@ const {
 } = require("../service/user");
 
 const signInController = async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
 
     const user = await getUserByUserName(username);
 
@@ -37,8 +36,7 @@ const signInController = async (req, res) => {
 };
 
 const registerAccount = async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const { username, password } = req.body;
 
     const user = await getUserByUserName(username);
     // can not create user if user existed

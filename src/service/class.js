@@ -11,9 +11,7 @@ const getAllClass = async (req, res) => {
 
 const createClass = async (data) => {
   try {
-    const id = data.id;
-    const name = data.name;
-    const numberOfStudent = data.numberOfStudent;
+    const { id, name, numberOfStudent } = data;
 
     const [rows, fields] = await db
       .promise()
@@ -31,9 +29,7 @@ const createClass = async (data) => {
 
 const updateClass = async (data) => {
   try {
-    const id = data.id;
-    const name = data.name;
-    const numberOfStudent = data.numberOfStudent;
+    const { id, name, numberOfStudent } = data;
 
     const [rows, fields] = await db
       .promise()
@@ -51,7 +47,7 @@ const updateClass = async (data) => {
 
 const deleteClass = async (data) => {
   try {
-    const classdId = data.classdId;
+    const { classdId } = data;
 
     const [rows, fields] = await db
       .promise()

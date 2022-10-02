@@ -2,17 +2,16 @@ require("dotenv").config();
 const nodemailer = require("nodemailer");
 const { RESPONSE_CODE } = require("../constant");
 
-const sendMailToStudent = async (req, res) => {
-  const content = req.body.content;
-  const subject = req.body.subject;
-  const receiveMail = req.body.receiveMail;
+const { EMAIL, PASSWORD } = process.env;
 
+const sendMailToStudent = async (req, res) => {
+  const { content, subject, receiveMail } = req.body;
 
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
+      user: EMAIL,
+      pass: PASSWORD,
     },
   });
 

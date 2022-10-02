@@ -14,12 +14,7 @@ const getAllStudentByClassId = async (classID) => {
 
 const createStudent = async (data) => {
   try {
-    const id = data.id;
-    const name = data.name;
-    const age = data.age;
-    const email = data.email;
-    const classID = data.classID;
-    const sex = data.sex;
+    const { id, name, age, email, classID, sex } = data;
 
     const [rows, fields] = await db
       .promise()
@@ -40,12 +35,7 @@ const createStudent = async (data) => {
 
 const updateStudent = async (data) => {
   try {
-    const id = data.id;
-    const name = data.name;
-    const age = data.age;
-    const email = data.email;
-    const classID = data.classID;
-    const sex = data.sex;
+    const { id, name, age, email, classID, sex } = data;
 
     const [rows, fields] = await db
       .promise()
@@ -62,7 +52,7 @@ const updateStudent = async (data) => {
 
 const deleteStudent = async (data) => {
   try {
-    const idDelete = data.idDelete;
+    const { idDelete } = data;
 
     const [rows, fields] = await db
       .promise()

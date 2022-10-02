@@ -22,9 +22,7 @@ const getAllClassController = async (req, res) => {
 };
 
 const createClassController = async (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const numberOfStudent = req.body.numberOfStudent;
+  const { id, name, numberOfStudent } = req.body;
 
   if (id === undefined) {
     res.send({
@@ -43,9 +41,7 @@ const createClassController = async (req, res) => {
 };
 
 const updateClassController = async (req, res) => {
-  const id = req.body.id;
-  const name = req.body.name;
-  const numberOfStudent = req.body.numberOfStudent;
+  const { id, name, numberOfStudent } = req.body;
 
   if (id === undefined) {
     res.send({
@@ -64,7 +60,7 @@ const updateClassController = async (req, res) => {
 };
 
 const deleteClassController = async (req, res) => {
-  const classdId = req.params.classdId;
+  const { classdId } = req.params;
 
   if (classdId === undefined) {
     res.send({
@@ -83,7 +79,7 @@ const deleteClassController = async (req, res) => {
 };
 
 const getAllStudentClassController = async (req, res) => {
-  const classID = req.params.classID;
+  const { classID } = req.params;
 
   if (classID === undefined) {
     res.send({

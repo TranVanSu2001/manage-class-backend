@@ -16,8 +16,7 @@ const getUserByUserName = async (username) => {
 };
 
 const createUser = async (data) => {
-    const username = data.username;
-    const password = data.password;
+    const { username, password } = data;
 
     try {
         const decodedPassword = await generatePassword(password);
