@@ -1,9 +1,29 @@
 const { RESPONSE_CODE } = require("../constant");
-const { getUserFromToken } = require('../service/user');
+const { validateAuthToken, getUserByUserName } = require('../service/user');
+const { getUserFromCache, saveUserToCache } = require('../service/cache');
 
 const validateUser = async (req, res, next) => {
     const { accesstoken } = req.headers;
-    const user = await getUserFromToken(accesstoken);
+    let user;
+    if (!accesstoken) {
+        return user;
+    }
+
+    const decodedData = await validateAuthToken(accesstoken);
+    if (decodedData) {
+        const userName = decodedData?.user;
+        const cachedUser = await getUserFromCache(userName);
+
+        if (!cachedUser) {
+            user = await getUserByUserName(decodedData?.user);
+
+            if (user) {
+                await saveUserToCache(user.username, JSON.stringify(user));
+            }
+        } else {
+            user = cachedUser;
+        }
+    }
 
     if (!user) {
         res.send({
