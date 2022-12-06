@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { db } = require("./db");
+const { getUserFromCache, saveUserToCache } = require('../service/cache');
 require("dotenv").config();
+
 
 const getUserByUserName = async (username) => {
     try {
@@ -52,28 +54,11 @@ const validateAuthToken = async (token) => {
     }
 };
 
-const getUserFromToken = async (token) => {
-    try {
-        let user;
-        if (!token) {
-            return user;
-        }
 
-        const decodedData = await validateAuthToken(token);
-        if (decodedData) {
-            user = await getUserByUserName(decodedData?.user);
-        }
-
-        return user;
-    } catch {
-        return null;
-    }
-};
 
 module.exports = {
     getUserByUserName,
     createUser,
     generateAuthToken,
     validateAuthToken,
-    getUserFromToken
 };
