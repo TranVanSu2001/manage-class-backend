@@ -9,7 +9,7 @@ const {
 // get all student
 // TODO: need to move database access to /service
 const getAllStudentController = async (req, res) => {
-  const [rows, fields] = await db.promise().query("SELECT * FROM student");
+  const [rows, fields] = await db.promise().query("SELECT * FROM Student");
 
   res.send({
     code: RESPONSE_CODE.SUCCESS,

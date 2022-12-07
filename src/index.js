@@ -1,11 +1,11 @@
 const express = require("express");
 const db = require("./service/db");
 const cors = require("cors");
-const router = require('./route');
+const router = require("./route");
 const { initTable } = require("./service/db");
 
 const app = express();
-const PORT = 3002;
+const PORT = 3004;
 
 app.use(cors());
 app.use(express.json());

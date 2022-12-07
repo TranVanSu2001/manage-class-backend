@@ -4,7 +4,7 @@ const getAllStudentByClassId = async (classID) => {
   try {
     const [rows, fields] = await db
       .promise()
-      .query(`select * from student where classID = (?);`, [classID]);
+      .query(`select * from Student where classID = (?);`, [classID]);
 
     return rows;
   } catch (err) {
@@ -18,7 +18,7 @@ const createStudent = async (data) => {
 
     const [rows, fields] = await db
       .promise()
-      .query("INSERT INTO student values(?,?,?,?,?,?)", [
+      .query("INSERT INTO Student values(?,?,?,?,?,?)", [
         id,
         name,
         age,
@@ -40,7 +40,7 @@ const updateStudent = async (data) => {
     const [rows, fields] = await db
       .promise()
       .query(
-        `UPDATE student set name = ?, age = ?, sex = ?, email = ?, classID = ? where id = ?`,
+        `UPDATE Student set name = ?, age = ?, sex = ?, email = ?, classID = ? where id = ?`,
         [name, age, sex, email, classID, id]
       );
 
@@ -56,7 +56,7 @@ const deleteStudent = async (data) => {
 
     const [rows, fields] = await db
       .promise()
-      .query(`delete from student where id = (?);`, [idDelete]);
+      .query(`delete from Student where id = (?);`, [idDelete]);
 
     return rows;
   } catch (err) {

@@ -2,7 +2,7 @@ const { db } = require("./db");
 
 const getAllClass = async (req, res) => {
   try {
-    const [rows, fields] = await db.promise().query("SELECT * FROM class");
+    const [rows, fields] = await db.promise().query("SELECT * FROM Class");
     return rows;
   } catch (err) {
     throw new Error(err);
@@ -15,7 +15,7 @@ const createClass = async (data) => {
 
     const [rows, fields] = await db
       .promise()
-      .query("INSERT INTO class (id, name, numberOfStudent) values(?,?,?)", [
+      .query("INSERT INTO Class (id, name, numberOfStudent) values(?,?,?)", [
         id,
         name,
         numberOfStudent,
@@ -33,7 +33,7 @@ const updateClass = async (data) => {
 
     const [rows, fields] = await db
       .promise()
-      .query(`UPDATE class set name = ?, numberOfStudent = ? where id = ?;`, [
+      .query(`UPDATE Class set name = ?, numberOfStudent = ? where id = ?;`, [
         name,
         numberOfStudent,
         id,
@@ -51,7 +51,7 @@ const deleteClass = async (data) => {
 
     const [rows, fields] = await db
       .promise()
-      .query(`delete from class where id = (?);`, [classdId]);
+      .query(`delete from Class where id = (?);`, [classdId]);
 
     return rows;
   } catch (err) {
@@ -61,7 +61,7 @@ const deleteClass = async (data) => {
 
 const getIdClass = async () => {
   try {
-    const [rows, fields] = await db.promise().query("SELECT id FROM class");
+    const [rows, fields] = await db.promise().query("SELECT id FROM Class");
 
     return rows;
   } catch (err) {

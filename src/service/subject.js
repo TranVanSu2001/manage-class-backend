@@ -2,7 +2,7 @@ const { db } = require("./db");
 
 const getAllSubject = async () => {
   try {
-    const [rows, fields] = await db.promise().query("SELECT * FROM subject");
+    const [rows, fields] = await db.promise().query("SELECT * FROM Subject");
     return rows;
   } catch (err) {
     throw new Error(err);
@@ -15,7 +15,7 @@ const createSubject = async (data) => {
   try {
     const [rows, fields] = await db
       .promise()
-      .query("INSERT INTO subject values(?,?,?,?,?)", [
+      .query("INSERT INTO Subject values(?,?,?,?,?)", [
         id,
         name,
         classID,
@@ -35,7 +35,7 @@ const updateSubject = async (data) => {
     const [rows, fields] = await db
       .promise()
       .query(
-        `UPDATE subject set name = ?, classID = ?, startTime = ?, endTime = ? where id = ?`,
+        `UPDATE Subject set name = ?, classID = ?, startTime = ?, endTime = ? where id = ?`,
         [name, classID, startTime, endTime, id]
       );
     return rows;
@@ -50,7 +50,7 @@ const deleteSubject = async (data) => {
   try {
     const [rows, fields] = await db
       .promise()
-      .query(`delete from subject where id = (?);`, [idDelete]);
+      .query(`delete from Subject where id = (?);`, [idDelete]);
     return rows;
   } catch (err) {
     throw new Error(err);
